@@ -1,0 +1,1 @@
+globalThis.inAPinchAtlasData("8-32","H4sIAAAAAAACE4uOVko0NDQzsjQ1NTa1UNIxMtcxMzU3MDQz1dE1NDUztjA1NdBRUoqNBQBiirFTKQAAAA==");

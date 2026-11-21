@@ -1,0 +1,27 @@
+{
+  "source": "Key West Florida Keys Best Vacation Spots in the USA 4k.mp4",
+  "providedBy": "User in the IN A PINCH conversation",
+  "sourceResolution": "1280x720",
+  "background": {
+    "file": "key-west-background.mp4",
+    "sourceStartSeconds": 15,
+    "sourceEndSeconds": 275,
+    "durationSeconds": 260,
+    "resolution": "960x540",
+    "framesPerSecond": 24,
+    "audio": false,
+    "loopTransition": "Final 1.25 seconds dissolve to the first frame; closing title card omitted."
+  },
+  "ocean": {
+    "file": "ocean-water.mp4",
+    "sourceStartSeconds": 20.5,
+    "sourceEndSeconds": 26.5,
+    "crop": { "x": 640, "y": 360, "width": 640, "height": 360 },
+    "durationSeconds": 6,
+    "resolution": "960x540",
+    "framesPerSecond": 30,
+    "audio": false,
+    "loopTransition": "Final 0.55 seconds dissolve to the first frame.",
+    "note": "Decorative real-water footage, not a georeferenced satellite basemap."
+  }
+}

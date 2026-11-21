@@ -1,0 +1,1 @@
+globalThis.inAPinchAtlasData("7-36","H4sIAAAAAAACE03OMQrDMAyF4asYzSpIiuVYc6CXMB5caEhJmkKJh96+oXUg+/c/XkqwMqtnEgnMgF4xsPZkghdWEy/KCJAxQeEo0XxPJ6VNsUWEa70vbivr7MbyfraGOq9Eoh4w/KJ94IhibNOnD7uzv7PDCXUIw2P7uNfohqmWbbqVpc6Q8xefylb2wAAAAA==");
