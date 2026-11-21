@@ -1,0 +1,12 @@
+{
+  "boundaryEdition": "U.S. Census Bureau, 2025 cartographic boundary files, 1:500,000",
+  "placeSource": "https://www2.census.gov/geo/tiger/GENZ2025/shp/cb_2025_us_place_500k.zip",
+  "countySource": "https://www2.census.gov/geo/tiger/GENZ2025/shp/cb_2025_us_county_500k.zip",
+  "subdivisionSource": "https://www2.census.gov/geo/tiger/GENZ2025/shp/cb_2025_us_cousub_500k.zip",
+  "stateSources": "U.S. Census TIGERweb State_County, 2026. See us-geography.js.",
+  "nycNeighborhoodSource": "https://data.cityofnewyork.us/resource/9nt8-h7nd.geojson",
+  "nycNeighborhoodAttribution": "NYC Department of City Planning, 2020 Neighborhood Tabulation Areas (NTA). Names describe statistical areas and sometimes combine several neighborhoods.",
+  "recordCounts": {"countyOrEquivalent":3235,"censusPlaces":32629,"additionalTownOrTownshipPolygons":12166,"nycNta":262},
+  "municipalSubdivisionStates": ["CT","IL","IN","MA","ME","MI","MN","NH","NJ","NY","OH","PA","RI","VT","WI"],
+  "displayNotes": "Labels describe the point under the center of the map. This edition uses the published Census place, town or township, then county or equivalent, then state or territory, according to zoom and available polygons. The NYC borough names correspond to the five constituent counties. Outside polygon coverage, a nearby OpenStreetMap neighborhood label can supplement the municipal heading at close zoom. Such labels are marked approximate. Territorial Census places can be villages, comunidades or zonas urbanas. Areas on a river, coast or boundary can change labels as the center crosses the generalized outline."
+}

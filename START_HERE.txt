@@ -1,0 +1,18 @@
+IN A PINCH V5
+
+PREVIEW
+Extract the entire ZIP. Open OPEN_ME.html for a local preview. Keep the assets,
+data and scripts folders beside it. An internet connection loads street tiles,
+business listings and directions. Use HTTPS or localhost for current location.
+
+GITHUB PAGES
+Upload the CONTENTS of IN_A_PINCH_V5_GITHUB_UPLOAD to the directory your Pages
+site publishes. index.html belongs at that directory's top level. To preserve
+earlier versions, place those contents in a new v5/ directory on the same site.
+The upload is ready as supplied. No map API key or backend setup is needed.
+
+USING THE ATLAS
+Choose Browse destinations to click the U.S. map, pick a state from the
+dropdown, or type a city and state. Select a destination to fly there. Pan to
+update the sidebar. Use Map key for the different facility colors and symbols.
+Select a stop for restroom and shower information, directions and source links.
