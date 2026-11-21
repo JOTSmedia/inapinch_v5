@@ -1,0 +1,57 @@
+.app{position:relative;z-index:1}
+.site-backdrop{position:fixed;inset:0;z-index:0;pointer-events:none;background:#087b9e url('assets/key-west-background-poster.jpg') center/cover no-repeat}
+.background-video{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.site-backdrop .background-video{object-position:center center}
+.site-header{background:linear-gradient(115deg,#034e749e,#087d9a70 65%,#0e9abc73)}
+.header-actions{gap:12px}
+.sidebar,.sidebar-top{background:transparent}
+.intro{background:linear-gradient(90deg,#00395bb3,#044d7657 65%,#104d6f14);text-shadow:0 1px 8px #002d4c}
+.finder-controls{position:relative;margin:-18px -22px -18px;padding:18px 22px;background:#edf9fff2;backdrop-filter:blur(8px)}
+.result-list{background:#edf8fdd9;backdrop-filter:blur(8px)}
+.results-toolbar,.sidebar-footer{background:#f8fdfff2}
+.result-card{background:#fffffffa}
+.map-region{background:#0878a3 url('assets/ocean-water-poster.jpg') center/cover no-repeat}
+.ocean-footage{position:absolute;inset:0;z-index:0;pointer-events:none;background:#0878a3 url('assets/ocean-water-poster.jpg') center/cover no-repeat;overflow:hidden}
+.ocean-footage::after{content:'';position:absolute;inset:0;background:linear-gradient(140deg,#006e9a08,#003d6826);pointer-events:none}
+#map,.leaflet-container{background:transparent!important;background-image:none!important}
+#map{z-index:1}
+.map-topbar,.map-legend,.island-note{z-index:500}
+.tag-unconfirmed{background:#fff1e0;color:#926324}
+.ocean-label{color:#e8fbff;opacity:.9;text-shadow:0 1px 6px #00334bb3}
+.island-title{color:#f9d8e8;opacity:.9;text-shadow:0 1px 2px #00649c77}
+.rating-summary>span:first-child{color:#b69914;font-size:19px;line-height:1}
+.rating-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.rating-retry{border:0;background:none;color:#057ba8;font:inherit;text-decoration:underline;padding:3px;cursor:pointer}
+.rating-panel .rating-privacy{font-size:12px;line-height:1.5;margin-top:13px}
+.rating-panel .rating-message{min-height:20px;margin:10px 0}
+.detail-section .detail-unconfirmed{color:#8b6129;font-weight:500;font-size:14px;margin-bottom:9px}
+.island-note{color:#f0fbff;opacity:.92;text-shadow:0 1px 6px #003652b3}
+@media(min-width:1550px){.finder-controls{margin:-19px -24px -18px;padding:19px 24px 18px}}
+@media(max-width:1100px) and (min-width:761px){.finder-controls{margin:-16px -18px -16px;padding:16px 18px}.header-actions{gap:9px}}
+@media(max-height:780px) and (min-width:761px){.finder-controls{margin-top:-14px;margin-bottom:-14px;padding-top:14px;padding-bottom:14px}}
+@media(max-width:760px){.sidebar{width:calc(100% - 28px);min-width:0;background:transparent}.sidebar-top{background:transparent}.finder-controls{margin:-12px;padding:12px;border-radius:10px}.header-actions{gap:8px}.app[data-view=list] .sidebar{width:100%;background:transparent}.app[data-view=list] .sidebar-top{background:transparent}.app[data-view=list] .finder-controls{margin:-14px -15px -15px;padding:14px 15px 15px;border-radius:0}.map-topbar{top:var(--mobile-controls-top,211px)}.map-error{top:calc(var(--mobile-controls-top,211px) + 52px)}}
+.background-video[hidden]{display:none!important}
+.background-video::-webkit-media-controls,.background-video::-webkit-media-controls-enclosure,.background-video::-webkit-media-controls-start-playback-button{display:none!important}
+
+/* The water clip feeds real vector water polygons. Its staging element has no
+   visible rectangle or playback UI. The fallback is clipped to surveyed land. */
+body[data-city] .site-backdrop { display:none; }
+body[data-city=key-west][data-map-style] .map-region > .ocean-footage {
+  position:absolute; inset:0; width:1px; height:1px; display:block; visibility:visible; opacity:0;
+  padding:0; border:0; margin:0; background:none; pointer-events:none; overflow:hidden;
+}
+body .map-region > .ocean-footage::after { content:none; }
+body .key-west-sea-pane { pointer-events:none; }
+body .key-west-sea-pane :is(.key-west-sea-poster,.key-west-sea-film) {
+  -webkit-mask:url('assets/key-west-ocean-mask.svg') center/100% 100% no-repeat;
+  mask:url('assets/key-west-ocean-mask.svg') center/100% 100% no-repeat;
+  opacity:.55; object-fit:fill; pointer-events:none; inset:0 auto auto 0;
+}
+body .key-west-sea-pane:has(.key-west-sea-film:not([hidden])) .key-west-sea-poster { visibility:hidden; }
+@media (prefers-reduced-motion:reduce),(prefers-reduced-data:reduce) {
+  body .key-west-sea-film { display:none; }
+  body .key-west-sea-pane .key-west-sea-poster { visibility:visible; }
+}
+@supports not ((mask-image:url('')) or (-webkit-mask-image:url(''))) {
+  body .key-west-sea-pane { display:none; }
+}
