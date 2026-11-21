@@ -1,0 +1,13 @@
+.stacked-stops {
+  box-sizing:border-box;width:min(26rem,calc(100% - 28px));max-height:min(72dvh,32rem);padding:0;
+  border:1px solid var(--hud-etch,#8fd8d9);border-radius:4px 15px 4px 4px;
+  color:#edf6f4;background:#14242e;box-shadow:0 12px 44px #07121999;overflow:auto;
+}
+.stacked-stops::backdrop {background:#07111b88;}
+.stacked-stops header {display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 13px;border-bottom:1px solid #506974;background:#10212b;position:sticky;top:0;}
+.stacked-stops h2 {margin:0;font:650 1.45rem/1.08 var(--atlas-title,system-ui);}
+.stacked-stops button {min-height:44px;color:inherit;background:transparent;border:0;font:inherit;text-transform:uppercase;}
+.stacked-stops header button {padding:0 8px;color:var(--hud-accent,#b3f3e9);}
+.stacked-stop-list button {display:grid;width:100%;gap:3px;padding:10px 15px;text-align:left;border-bottom:1px solid #39515d;overflow-wrap:break-word;}
+.stacked-stop-list button:is(:hover,:focus-visible) {background:#203d48;}
+.stacked-stop-list span {font-size:.8rem;color:#c0d4d9;}

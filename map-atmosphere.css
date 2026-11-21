@@ -1,0 +1,143 @@
+/* Camera-fixed engraving sits between the geographic basemap and facility
+   markers. The center stays clear. Geographic boundaries and route strokes
+   come exclusively from the map renderer. */
+.map-surface-art {
+  --print:var(--map-local-ink,#f0c575);
+  --light:var(--map-local-highlight,#99dbca);
+  --water:var(--map-local-water,#235257);
+  --surface:var(--map-local-paper,#14272b);
+  --step:var(--map-local-step,24px);
+  --angle:var(--map-local-angle,35deg);
+  --etch:color-mix(in srgb,var(--light) 38%,transparent);
+  --underprint:color-mix(in srgb,var(--print) 20%,transparent);
+  --rule:color-mix(in srgb,var(--light) 72%,transparent);
+  --paper-grain:
+    repeating-linear-gradient(var(--angle),transparent 0 calc(var(--step) - 1px),var(--underprint) calc(var(--step) - 1px) var(--step)),
+    radial-gradient(var(--etch) .65px, transparent .95px) 0 0/8px 8px;
+  position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; pointer-events:none;
+  overflow:hidden; user-select:none; isolation:isolate; line-height:1; font-family:var(--font,system-ui,sans-serif);
+}
+.map-surface-art *, .map-surface-art *::after, .map-surface-art *::before { pointer-events:none; box-sizing:border-box; }
+.map-surface-art .surface-definitions { position:absolute; width:0; height:0; overflow:hidden; }
+.map-plate-finish { position:absolute; inset:0; background:var(--paper-grain); opacity:.78; }
+.map-plate-finish {
+  -webkit-mask-image:linear-gradient(90deg,#0007,#0002 7%,transparent 16% 84%,#0002 93%,#0007),
+    linear-gradient(0deg,#0008,#0001 10%,transparent 19% 85%,#0002 94%,#0008);
+  mask-image:linear-gradient(90deg,#0007,#0002 7%,transparent 16% 84%,#0002 93%,#0007),
+    linear-gradient(0deg,#0008,#0001 10%,transparent 19% 85%,#0002 94%,#0008);
+}
+.map-surface-art::before {
+  content:''; position:absolute; inset:0; background:
+    radial-gradient(ellipse 42% 29% at 100% 100%,color-mix(in srgb,var(--water) 23%,transparent),transparent),
+    radial-gradient(ellipse 38% 30% at 0 0,color-mix(in srgb,var(--light) 9%,transparent),transparent);
+}
+.map-edge-register { position:absolute; inset:7px; }
+.map-edge-register i { position:absolute; width:31px; height:21px; border-top:1px solid var(--rule); border-left:1px solid var(--rule); }
+.map-edge-register i::before { content:''; position:absolute; left:-1px; top:-1px; width:10px; height:3px; background:var(--light); }
+.map-edge-register i::after { content:''; position:absolute; top:4px; left:4px; width:5px; height:5px; border-left:1px solid var(--rule); border-top:1px solid var(--rule); }
+.map-edge-register i:nth-child(1) { left:0; top:0; }
+.map-edge-register i:nth-child(2) { right:0; top:0; transform:scaleX(-1); }
+.map-edge-register i:nth-child(3) { left:0; bottom:0; transform:scaleY(-1); }
+.map-edge-register i:nth-child(4) { right:0; bottom:0; transform:scale(-1); }
+
+.map-edition-plate {
+  position:absolute; left:50%; bottom:var(--map-edition-bottom,25px); transform:translateX(-50%);
+  display:flex; align-items:center; gap:9px; width:max-content; max-width:calc(100% - 258px); padding:6px 8px;
+  background:color-mix(in srgb,var(--surface) 73%,#081419); color:#fffdf3; border:1px solid var(--rule);
+  border-left:3px solid var(--light); border-radius:1px 6px 1px 1px; box-shadow:0 2px 8px #030d144d;
+}
+.map-edition-plate::after { content:''; display:block; position:absolute; right:8px; bottom:-1px; height:2px; width:25px; background:var(--print); }
+.edition-etch { display:block; width:44px; height:31px; flex:none; color:var(--light); }
+.map-edition-copy { display:grid; gap:3px; min-width:0; }
+#map-edition-place { color:#fffdf3; font:650 17px/1 var(--atlas-title,'Arial Narrow',sans-serif); letter-spacing:.025em; text-transform:uppercase; }
+#map-edition-name { color:#e8ede1; font:500 10px/1.15 var(--font,system-ui); letter-spacing:.035em; text-transform:uppercase; }
+#map-edition-place, #map-edition-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.map-edition-position { display:flex; align-items:center; gap:6px; padding-left:9px; border-left:1px solid var(--rule); color:var(--light); }
+#map-edition-center { max-width:73px; color:#e4ebe6; font:500 10px/1.35 var(--atlas-mono,monospace); font-variant-numeric:tabular-nums; }
+.edition-north { width:14px; height:23px; flex:none; }
+[data-map-family=island] .map-surface-art,
+[data-map-family=coastal] .map-surface-art,
+[data-map-family=bay] .map-surface-art {
+  --paper-grain:
+    repeating-radial-gradient(ellipse 106% 68% at 0% 115%,transparent 0 12px,var(--etch) 12px 13px,transparent 13px 21px),
+    repeating-linear-gradient(var(--angle),transparent 0 32px,var(--underprint) 32px 33px,transparent 33px 64px);
+}
+[data-map-family=metro] .map-surface-art, [data-map-family=industrial] .map-surface-art {
+  --paper-grain:repeating-linear-gradient(0deg,transparent 0 11px,var(--underprint) 11px 12px,transparent 12px 24px),
+    repeating-linear-gradient(90deg,transparent 0 23px,var(--etch) 23px 24px),
+    repeating-linear-gradient(45deg,transparent 0 52px,var(--underprint) 52px 53px);
+}
+[data-map-family=river] .map-surface-art,[data-map-family=delta] .map-surface-art {
+  --paper-grain:repeating-radial-gradient(ellipse 120% 41% at 85% -8%, transparent 0 15px,var(--etch) 15px 16px,transparent 16px 24px),
+    radial-gradient(var(--underprint) .9px,transparent 1.1px) 3px 3px/9px 9px;
+}
+[data-map-family=forest] .map-surface-art,[data-map-family=mountain] .map-surface-art {
+  --paper-grain:repeating-radial-gradient(ellipse 74% 130% at 114% 25%,transparent 0 9px,var(--etch) 9px 10px,transparent 10px 18px),
+    repeating-linear-gradient(var(--angle),transparent 0 18px,var(--underprint) 18px 19px,transparent 19px 38px);
+}
+[data-map-family=neon] .map-surface-art {
+  --paper-grain:repeating-linear-gradient(0deg,transparent 0 5px,var(--underprint) 5px 6px),
+    repeating-linear-gradient(135deg,transparent 0 33px,var(--etch) 33px 34px,transparent 34px 37px,var(--etch) 37px 38px,transparent 38px 80px);
+}
+[data-map-family=capital] .map-surface-art {
+  --paper-grain:repeating-conic-gradient(from -60deg at 105% 105%,transparent 0deg 9.2deg,var(--etch) 9.3deg 9.5deg,transparent 9.6deg 12deg),
+    repeating-radial-gradient(ellipse at 105% 105%,transparent 0 25px,var(--underprint) 25px 26px);
+}
+[data-map-family=lake] .map-surface-art {
+  --paper-grain:repeating-linear-gradient(0deg,transparent 0 10px,var(--etch) 10px 11px,transparent 11px 17px),
+    repeating-linear-gradient(var(--angle),transparent 0 25px,var(--underprint) 25px 26px);
+}
+[data-map-family=desert] .map-surface-art {
+  --paper-grain:repeating-radial-gradient(ellipse 145% 31% at 60% 113%,transparent 0 19px,var(--etch) 19px 20px,transparent 20px 25px),
+    radial-gradient(var(--underprint) .85px,transparent 1px) 0 0/6px 9px;
+}
+[data-map-family=prairie] .map-surface-art {
+  --paper-grain:repeating-linear-gradient(28deg,transparent 0 26px,var(--etch) 26px 27px),
+    repeating-linear-gradient(-31deg,transparent 0 29px,var(--underprint) 29px 30px);
+}
+
+/* The engraved city mark is paired with edge treatment. None is placed as a
+   road, station, landmark or other feature in the map's geographic field. */
+[data-map-motif=reef] .map-edge-register i,[data-map-motif=outrigger] .map-edge-register i { width:42px; height:26px; border-radius:65% 0 0 0; }
+[data-map-motif=subway] .map-edge-register { border-inline:2px solid var(--underprint); }
+[data-map-motif=subway] .map-edge-register i { width:49px; border-block-start:3px double var(--light); }
+[data-map-motif=subway] .map-edge-register i::after { inset:3px auto auto 4px; border:1px solid var(--print); border-radius:50%; width:7px; height:7px; }
+[data-map-motif=subway] .map-edition-plate { border-width:1px 1px 3px; border-radius:0; border-bottom-color:var(--print); }
+[data-map-motif=deco] .map-edge-register i { width:48px; height:30px; border-color:var(--light); box-shadow:inset 3px 3px 0 -2px var(--print),inset 7px 7px 0 -6px var(--light); }
+[data-map-motif=deco] .map-edge-register i::after { inset:7px auto auto 7px; width:20px; height:11px; border-color:var(--print); }
+[data-map-motif=deco] .map-edition-plate { border-left:3px double var(--light); border-bottom-color:var(--print); box-shadow:2px 2px 0 color-mix(in srgb,var(--print) 69%,transparent); }
+[data-map-motif=marquee] .map-edge-register i { border-style:dotted; width:48px; border-width:2px 0 0 2px; }
+[data-map-motif=marquee] .map-edition-plate { border-style:double; border-width:3px; }
+[data-map-motif=suspension] .map-edge-register i,[data-map-motif=truss] .map-edge-register i,[data-map-motif=lattice] .map-edge-register i { border-top:3px double var(--rule); width:43px; }
+[data-map-motif=front-range] .map-edge-register i,[data-map-motif=canal] .map-edge-register i,[data-map-motif=bayou] .map-edge-register i { width:47px; height:13px; }
+[data-map-motif=crescent] .map-edge-register i,[data-map-motif=ferry] .map-edge-register i,[data-map-motif=fountain] .map-edge-register i { border-radius:25px 0 0 0; width:35px; height:26px; }
+[data-map-motif=radial] .map-edge-register i,[data-map-motif=squares] .map-edge-register i,[data-map-motif=loop] .map-edge-register i { width:28px; height:28px; border-width:2px 0 0 2px; }
+[data-map-variant="1"] .map-surface-art,[data-map-variant="5"] .map-surface-art { --underprint:color-mix(in srgb,var(--print) 26%,transparent); }
+[data-map-variant="2"] .map-edge-register i,[data-map-variant="6"] .map-edge-register i { height:29px; }
+[data-map-variant="3"] .map-edge-register i::before,[data-map-variant="7"] .map-edge-register i::before { width:15px; }
+body[data-map-style=city] .map-surface-art { --etch:color-mix(in srgb,var(--water) 43%,transparent); --rule:color-mix(in srgb,var(--surface) 64%,transparent); }
+body[data-map-style=city] .map-edition-plate { background:#11232bee; border-color:color-mix(in srgb,var(--light) 60%,#63767a); }
+@media (min-width:761px) and (max-width:1030px) {
+  .map-edition-plate { max-width:calc(100% - 174px); padding:4px 6px; gap:6px; }
+  .map-edition-position { display:none; }
+  .edition-etch { width:34px; height:25px; }
+}
+@media (max-width:760px) {
+  .map-edge-register { inset:4px; }
+  .map-edge-register i { max-width:24px; max-height:16px; }
+  .map-edition-plate {
+    left:auto; right:9px; bottom:var(--map-edition-bottom,calc(var(--hud-tray-clearance,155px) + 12px));
+    transform:none; max-width:min(58%,230px); gap:5px; padding:4px 6px; border-left-width:2px; box-shadow:none;
+  }
+  .edition-etch { width:28px; height:21px; }
+  #map-edition-place { font-size:13px; }
+  #map-edition-name { font-size:9px; }
+  .map-edition-position { display:none; }
+}
+@media (max-height:530px) { .map-edition-plate { display:none; } }
+@media (max-width:760px) { .app:has(#mobile-hud-toggle[aria-expanded=true]) .map-edition-plate { display:none; } }
+@media (prefers-reduced-transparency:reduce) { .map-edition-plate { background:#112027; } }
+@media (forced-colors:active) {
+  .map-plate-finish,.map-edge-register,.edition-etch,.map-surface-art::before { display:none; }
+  .map-edition-plate { color:CanvasText; background:Canvas; border:1px solid CanvasText; }
+}

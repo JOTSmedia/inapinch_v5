@@ -1,0 +1,151 @@
+{
+  "source": "OpenFreeMap / OpenMapTiles / OpenStreetMap",
+  "sourceSnapshot": "2026-11-15",
+  "coverage": "Central-area snapshots supplemented by viewport venue discovery. Does not guarantee every real restaurant, bar, or restroom.",
+  "cities": [
+    {
+      "city": "key-west",
+      "previous": 152,
+      "listings": 250,
+      "documented": 36
+    },
+    {
+      "city": "nyc",
+      "previous": 6,
+      "listings": 5900,
+      "documented": 90
+    },
+    {
+      "city": "miami",
+      "previous": 6,
+      "listings": 664,
+      "documented": 26
+    },
+    {
+      "city": "la",
+      "previous": 6,
+      "listings": 861,
+      "documented": 28
+    },
+    {
+      "city": "austin",
+      "previous": 6,
+      "listings": 976,
+      "documented": 44
+    },
+    {
+      "city": "sf",
+      "previous": 8,
+      "listings": 2837,
+      "documented": 126
+    },
+    {
+      "city": "chicago",
+      "previous": 6,
+      "listings": 1958,
+      "documented": 56
+    },
+    {
+      "city": "seattle",
+      "previous": 6,
+      "listings": 1446,
+      "documented": 37
+    },
+    {
+      "city": "new-orleans",
+      "previous": 6,
+      "listings": 729,
+      "documented": 16
+    },
+    {
+      "city": "nashville",
+      "previous": 6,
+      "listings": 481,
+      "documented": 9
+    },
+    {
+      "city": "boston",
+      "previous": 6,
+      "listings": 1469,
+      "documented": 48
+    },
+    {
+      "city": "dc",
+      "previous": 6,
+      "listings": 1600,
+      "documented": 79
+    },
+    {
+      "city": "san-diego",
+      "previous": 6,
+      "listings": 850,
+      "documented": 109
+    },
+    {
+      "city": "portland",
+      "previous": 6,
+      "listings": 1213,
+      "documented": 77
+    },
+    {
+      "city": "denver",
+      "previous": 6,
+      "listings": 1507,
+      "documented": 414
+    },
+    {
+      "city": "las-vegas",
+      "previous": 6,
+      "listings": 548,
+      "documented": 25
+    },
+    {
+      "city": "phoenix",
+      "previous": 6,
+      "listings": 394,
+      "documented": 19
+    },
+    {
+      "city": "atlanta",
+      "previous": 6,
+      "listings": 743,
+      "documented": 16
+    },
+    {
+      "city": "charleston",
+      "previous": 6,
+      "listings": 386,
+      "documented": 34
+    },
+    {
+      "city": "savannah",
+      "previous": 6,
+      "listings": 226,
+      "documented": 5
+    },
+    {
+      "city": "orlando",
+      "previous": 6,
+      "listings": 284,
+      "documented": 8
+    },
+    {
+      "city": "honolulu",
+      "previous": 6,
+      "listings": 941,
+      "documented": 69
+    },
+    {
+      "city": "dallas",
+      "previous": 6,
+      "listings": 513,
+      "documented": 19
+    },
+    {
+      "city": "houston",
+      "previous": 6,
+      "listings": 655,
+      "documented": 14
+    }
+  ]
+}

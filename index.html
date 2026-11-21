@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10212c">
+  <meta name="description" content="Find restrooms, hotels, restaurants, bars, gas stations and travel-center showers across the U.S. Explore by location, city or state and check access before you go.">
+  <title>IN A PINCH V5 · U.S. RESTROOM ATLAS</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%221%22%20y%3D%221%22%20width%3D%2262%22%20height%3D%2262%22%20rx%3D%2213%22%20fill%3D%22%2310212c%22%2F%3E%3Cg%20stroke%3D%22%2395e2de%22%20stroke-width%3D%223.3%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M11%2051V29a21%2021%200%200%201%2042%200v22M18%2051V29a14%2014%200%200%201%2028%200v22M8%2053h48%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2229%22%20r%3D%224%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M32%2036v12m-5-8h10%22%20stroke%3D%22%23ffd995%22%20stroke-width%3D%223.2%22%2F%3E%3C%2Fsvg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Poiret+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/maplibre-gl.css">
+  <link rel="stylesheet" href="assets/leaflet.css">
+  <link rel="stylesheet" href="assets/MarkerCluster.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="map-theme.css">
+  <link rel="stylesheet" href="tropic-theme.css">
+  <link rel="stylesheet" href="ocean.css">
+  <link rel="stylesheet" href="city-theme.css">
+  <link rel="stylesheet" href="place-detail.css">
+  <link rel="stylesheet" href="destination-picker.css">
+  <link rel="stylesheet" href="area-sidebar.css">
+  <link rel="stylesheet" href="atlas-console.css">
+  <link rel="stylesheet" href="facility-icons.css">
+  <link rel="stylesheet" href="map-atmosphere.css">
+  <link rel="stylesheet" href="hud.css">
+  <link rel="stylesheet" href="stacked-stops.css">
+  <link rel="stylesheet" href="hud-controls.css">
+  <link rel="stylesheet" href="mobile-hud.css">
+  <link rel="stylesheet" href="world-hud.css">
+  <link rel="stylesheet" href="click-layout.css">
+  <link rel="stylesheet" href="map-layers.css">
+</head>
+<body data-city="us" data-map-style="wireframe" data-map-family="national" data-map-motif="meridian">
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+    <symbol id="icon-location" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+    <symbol id="icon-bookmark" viewBox="0 0 24 24"><path d="M6 4h12v17l-6-4-6 4Z"/></symbol>
+    <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="icon-map" viewBox="0 0 24 24"><path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2ZM9 3v16M15 5v16"/></symbol>
+    <symbol id="icon-list" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12M3 6h1M3 12h1M3 18h1"/></symbol>
+    <symbol id="icon-fit" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="icon-accessible" viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="m10 8 1 6h6l3 5M10 11a6 6 0 1 0 5 9M11 8h6"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></symbol>
+  </svg>
+
+  <div id="app" class="app" data-view="map">
+    <header class="site-header">
+      <svg class="hud-horizon" aria-hidden="true" focusable="false" width="720" height="76" viewBox="0 0 720 76" preserveAspectRatio="none" fill="none">
+        <path class="horizon-latitudes" d="M0,52 32,45 68,52 103,40 144,17 182,8 221,30 257,44 299,41 341,32 379,47 414,40 450,16 486,28 524,3 567,39 607,45 650,28 690,49 730,53 M-4.6,55.5 28,49.5 64.7,56.1 100.2,44.9 141.7,23.3 180,14.6 219.3,34.7 255.5,47.7 297.8,45.2 340.2,37.3 378.7,51.5 414.3,45 450.9,22.5 487.6,33.2 526.3,9.8 570,43 610.5,48.8 654,33.5 694.3,53.2 734.6,57 M-9.9,59.6 23.5,54.6 60.9,60.8 97,50.5 139,30.5 177.7,22.2 217.3,40 253.7,51.9 296.4,50.1 339.3,43.4 378.4,56.5 414.6,50.7 452,30 489.5,39.2 529,17.6 573.4,47.6 614.6,53.1 658.5,39.8 699.2,58 739.8,61.6 M-15.8,64.1 18.4,60.3 56.6,66.1 93.4,56.8 136,38.7 175.1,30.7 215,46.1 251.7,56.6 294.9,55.5 338.3,50.3 378,62.3 414.9,57.1 453.2,38.4 491.6,45.9 532,26.4 577.3,52.7 619.1,58 663.7,46.8 704.7,63.5 745.6,66.8 M-23.3,70 11.9,67.6 51.1,72.8 88.7,64.9 132.1,49 171.8,41.5 212.1,53.8 249.2,62.6 292.9,62.5 337,59.1 377.5,69.6 415.4,65.3 454.7,49.2 494.3,54.4 535.8,37.6 582.2,59.3 624.9,64.2 670.2,55.9 711.8,70.4 753.1,73.4 M-32.9,77.3 3.7,76.9 44.2,81.3 82.9,75 127.3,62.1 167.6,55.2 208.5,63.5 246.1,70.3 290.4,71.2 335.4,70.1 376.9,78.8 415.9,75.6 456.7,62.7 497.6,65.2 540.6,51.7 588.5,67.6 632.2,72 678.4,67.2 720.7,79.2 762.6,81.7"/>
+        <path class="horizon-meridians" d="M0,52 -4.6,55.5 -9.9,59.6 -15.8,64.1 -23.3,70 -32.9,77.3 M32,45 28,49.5 23.5,54.6 18.4,60.3 11.9,67.6 3.7,76.9 M68,52 64.7,56.1 60.9,60.8 56.6,66.1 51.1,72.8 44.2,81.3 M103,40 100.2,44.9 97,50.5 93.4,56.8 88.7,64.9 82.9,75 M144,17 141.7,23.3 139,30.5 136,38.7 132.1,49 127.3,62.1 M182,8 180,14.6 177.7,22.2 175.1,30.7 171.8,41.5 167.6,55.2 M221,30 219.3,34.7 217.3,40 215,46.1 212.1,53.8 208.5,63.5 M257,44 255.5,47.7 253.7,51.9 251.7,56.6 249.2,62.6 246.1,70.3 M299,41 297.8,45.2 296.4,50.1 294.9,55.5 292.9,62.5 290.4,71.2 M341,32 340.2,37.3 339.3,43.4 338.3,50.3 337,59.1 335.4,70.1 M379,47 378.7,51.5 378.4,56.5 378,62.3 377.5,69.6 376.9,78.8 M414,40 414.3,45 414.6,50.7 414.9,57.1 415.4,65.3 415.9,75.6 M450,16 450.9,22.5 452,30 453.2,38.4 454.7,49.2 456.7,62.7 M486,28 487.6,33.2 489.5,39.2 491.6,45.9 494.3,54.4 497.6,65.2 M524,3 526.3,9.8 529,17.6 532,26.4 535.8,37.6 540.6,51.7 M567,39 570,43 573.4,47.6 577.3,52.7 582.2,59.3 588.5,67.6 M607,45 610.5,48.8 614.6,53.1 619.1,58 624.9,64.2 632.2,72 M650,28 654,33.5 658.5,39.8 663.7,46.8 670.2,55.9 678.4,67.2 M690,49 694.3,53.2 699.2,58 704.7,63.5 711.8,70.4 720.7,79.2 M730,53 734.6,57 739.8,61.6 745.6,66.8 753.1,73.4 762.6,81.7"/>
+      </svg>
+      <a class="brand" href="index.html" data-national-overview aria-label="IN A PINCH home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 46 54" fill="none"><path d="M5 48V24a18 18 0 0 1 36 0v24M10 48V24a13 13 0 0 1 26 0v24M15 48V24a8 8 0 0 1 16 0v24M23 2v9M1 48h44M1 53h44" stroke="currentColor" stroke-width="1.5"/><circle cx="23" cy="24" r="3" fill="currentColor"/><path d="M23 30v13M19 35h8" stroke="currentColor" stroke-width="1.7"/></svg>
+        </span>
+        <span class="brand-type"><span class="brand-name"><span class="sr-only">IN A PINCH</span><svg class="brand-lettering" width="176" height="24" viewBox="0 0 186 26" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
+          <g fill="currentColor" fill-rule="evenodd" transform="translate(4) skewX(-8)">
+            <path d="M1 2h6v22H1zM11 24V2h5l10 13V2h5v22h-5L16 11v13z"/>
+            <path d="m40 24 9-22h7l9 22h-6l-2-5H48l-2 5Zm10-10h5l-2.5-6.5z"/>
+            <path d="M74 24V2h15l5 4.5v6l-5 4.5h-9v7Zm6-12h7l1.5-1.5v-2L87 7h-7zM98 2h6v22h-6zM109 24V2h5l10 13V2h5v22h-5l-10-13v13zM140 2h12l3 3v3h-6l-1-1h-6l-2 2v8l2 2h7l1-1h5v3l-3 3h-12l-6-6V8zM159 2h6v8h10V2h6v22h-6v-9h-10v9h-6z"/>
+          </g>
+        </svg></span><span class="brand-tagline">U.S. restroom atlas</span></span>
+      </a>
+      <div class="header-actions">
+        <button id="city-picker-btn" class="destination city-picker-button" type="button" aria-haspopup="dialog"><span id="current-city-code">US</span><span id="current-city-name">United States</span><svg class="city-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m5 7 5 5 5-5"/></svg></button>
+        <span class="header-divider" aria-hidden="true"></span>
+        <button id="about-btn" class="about-button" type="button" aria-label="About the map"><svg class="icon"><use href="#icon-info"/></svg><span>About the map</span></button>
+      </div>
+    </header>
+
+    <nav class="city-strip" aria-label="Map destinations">
+      <button class="nation-shortcut" data-national-overview type="button" title="RETURN TO THE NATIONWIDE MAP"><svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg>U.S. atlas</button>
+      <div id="city-shortcuts" class="city-shortcuts" aria-label="Featured city guides"></div>
+      <button id="explore-cities-btn" type="button" aria-haspopup="dialog"><span>Browse destinations</span><svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg></button>
+    </nav>
+    <main class="workspace">
+      <section class="sidebar" aria-label="Find a bathroom">
+        <div id="mobile-hud-bar" class="mobile-hud-bar" hidden>
+          <button id="mobile-hud-toggle" type="button" aria-label="Expand stops and filters" aria-expanded="false" aria-controls="filters city-coverage result-list">
+            <span class="mobile-hud-grip" aria-hidden="true"></span><span>Stops &amp; filters</span>
+            <svg viewBox="0 0 18 18" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m4 11 5-5 5 5"/></svg>
+          </button>
+          <div id="mobile-hud-views"></div>
+        </div>
+        <div class="sidebar-top">
+          <div class="intro area-intro">
+            <div class="area-locator" id="area-locator" hidden aria-hidden="true">
+              <svg viewBox="0 0 128 84" focusable="false"><path class="locator-grid" d="M0 21h128M0 42h128M0 63h128M32 0v84M64 0v84M96 0v84"/><path id="area-outline" d=""/><g id="locator-cross" hidden><circle r="5.8"/><circle r="2.5"/></g></svg>
+            </div>
+            <p id="area-level" class="eyebrow">National atlas</p>
+            <h1 id="area-name">United States</h1>
+            <p class="intro-copy" id="area-parent">U.S. restroom atlas</p>
+            <small id="area-location-note" hidden></small>
+          </div>
+          <details class="area-design" id="area-design" hidden>
+            <summary><span class="area-palette-chips" aria-hidden="true"><i></i><i></i><i></i></span><span id="area-treatment"></span><svg class="icon" aria-hidden="true"><use href="#icon-info"/></svg></summary>
+            <div class="design-credit"><p id="area-design-basis"></p><a id="area-design-source" target="_blank" rel="noopener noreferrer" hidden></a></div>
+          </details>
+          <div class="finder-controls">
+          <label class="search-box" for="search-input">
+            <svg class="icon"><use href="#icon-search"/></svg>
+            <input id="search-input" type="search" placeholder="Search stops" autocomplete="off" aria-label="Search bathrooms by name, address, or area">
+            <kbd aria-hidden="true">/</kbd>
+          </label>
+          <button id="locate-btn" class="locate-button" type="button"><svg class="icon"><use href="#icon-location"/></svg><span>Find near me</span><span class="locate-button-accent" aria-hidden="true">✦</span></button>
+          <div id="location-status" class="location-status" role="status" aria-live="polite"></div>
+          <div id="filters" class="filters" aria-label="Filter bathrooms">
+            <button type="button" class="filter-chip active" data-filter="all" aria-pressed="true">All stops</button>
+            <button type="button" class="filter-chip" data-filter="free" aria-pressed="false">Free &amp; public</button>
+            <button type="button" class="filter-chip" data-filter="accessible" aria-pressed="false"><svg class="icon"><use href="#icon-accessible"/></svg>Accessible</button>
+            <button type="button" class="filter-chip" data-filter="open" aria-pressed="false"><svg class="icon"><use href="#icon-clock"/></svg>Open by schedule</button>
+            <button type="button" class="filter-chip" data-filter="purchase" aria-pressed="false">Bars &amp; restaurants</button>
+            <button type="button" class="filter-chip" data-filter="lodging" aria-pressed="false" title="HOTELS, MOTELS, INNS AND RESORTS. ASK THE FRONT DESK ABOUT LOBBY RESTROOM ACCESS.">Hotels &amp; motels</button>
+            <button type="button" class="filter-chip" data-filter="roadside" aria-pressed="false">Gas &amp; rest stops</button>
+            <button type="button" class="filter-chip" data-filter="showers" aria-pressed="false" title="STOPS WITH A DOCUMENTED SHOWER FACILITY">Showers</button>
+            <button type="button" class="filter-chip" data-filter="confirmed" aria-pressed="false">Mapped bathrooms</button>
+          </div>
+          </div>
+        </div>
+        <section id="city-coverage" class="city-coverage atlas-area" aria-label="Coverage for this map area">
+          <div class="area-counts" id="area-counts" role="group" aria-label="Unfiltered coverage for this map view">
+            <div class="area-count-scope"><strong id="area-count-scope">In view</strong><span id="area-count-scope-note">All listings</span></div>
+            <div class="area-count-item" title="PLACES WITH SOURCE EVIDENCE OF A RESTROOM"><strong id="area-count-wc">—</strong><span>Mapped bathrooms</span></div>
+            <div class="area-count-item" title="OTHER MAPPED STOPS WHERE RESTROOM ACCESS IS UNCONFIRMED"><strong id="area-count-other">—</strong><span>Other stops</span></div>
+          </div>
+          <div class="area-update"><p id="area-status" role="status" aria-live="polite">Loading mapped stops…</p><button type="button" id="area-retry" hidden>Retry</button></div>
+        </section>
+        <div class="results-toolbar">
+          <p id="result-count" aria-live="polite">Finding your next stop…</p>
+          <div class="result-actions">
+            <button id="saved-btn" class="icon-button saved-filter" type="button" aria-label="Show saved places" title="SAVED PLACES" aria-pressed="false"><svg class="icon"><use href="#icon-bookmark"/></svg></button>
+            <label class="sort-control"><span class="sr-only">Sort bathrooms</span><select id="sort-select"><option value="recommended">PUBLIC FIRST</option><option value="distance">NEAREST FIRST</option><option value="rating">MY TOP RATED</option><option value="name">NAME A–Z</option></select></label>
+          </div>
+        </div>
+        <div id="result-list" class="result-list" aria-label="Bathroom results"></div>
+        <footer class="sidebar-footer"><svg class="icon"><use href="#icon-info"/></svg><span id="filter-note">Public facilities first. Tap a stop for access details.</span></footer>
+      </section>
+
+      <section class="map-region" aria-label="U.S. restroom map">
+        <div id="map" aria-label="Interactive map of U.S. restroom stops"></div>
+        <div class="map-surface-art" id="map-surface-art">
+          <svg class="surface-definitions" aria-hidden="true" focusable="false"><defs><symbol id="etch-reef" viewBox="0 0 72 48"><path d="M4 29Q14 19 26 24T49 21T69 18M4 36Q20 26 31 30T68 24M4 43Q19 35 33 37T68 31M18 16l5-4m9 3 8-5m7 4 8-5"/></symbol><symbol id="etch-subway" viewBox="0 0 72 48"><path d="M3 33h19l18-18h29M3 25h15l18-18h33M8 41h16l18-18h25M20 25l8 8m13-19 6 9"/></symbol><symbol id="etch-deco" viewBox="0 0 72 48"><path d="M3 42h65M9 36h53M16 31V18h5V12h6v15h4V6h9v21h4V12h6v6h5v13M4 24h10m42 0h12M4 28h10m42 0h12"/></symbol><symbol id="etch-boulevard" viewBox="0 0 72 48"><path d="M4 43l27-25h9l28 25M22 43l14-24 14 24M6 19h18m27 0h16M5 16l12-6 14 5L45 8l20 8"/></symbol><symbol id="etch-batwing" viewBox="0 0 72 48"><path d="M3 32q7-12 15-4 8-15 17-2 8-13 16 1 8-5 18 6M5 38q15-10 25-4t38 0M19 15l9 3 8 7 8-7 9-3"/></symbol><symbol id="etch-suspension" viewBox="0 0 72 48"><path d="M3 31h66M3 35h66M19 33V9h4v24m26 0V9h4v24M3 29Q12 23 21 11q15 24 30 0 6 14 18 18M30 24v7m6-5v5m6-7v7"/></symbol><symbol id="etch-loop" viewBox="0 0 72 48"><path d="M5 9h51l8 8v18H14l-9-8V9Zm9 7h32l8 6v7H23l-9-7v-6Zm-9 4h9m40 2h10"/></symbol><symbol id="etch-ferry" viewBox="0 0 72 48"><path d="M7 26h51l-7 8H18Zm10-6h30v6H17Zm4-5h20v5H21Zm24 0v-5L56 5M5 41q8-5 16 0t16 0t16 0t16 0"/></symbol><symbol id="etch-crescent" viewBox="0 0 72 48"><path d="M8 10q24 36 56 8Q40 57 10 25M14 14q22 24 41 9M8 38l5-3m5 6 6-3m27-3 8-3"/></symbol><symbol id="etch-broadway" viewBox="0 0 72 48"><path d="M6 34h62M8 39h59M14 32V20l7-5 6 5v12M31 32V14l6-6 6 6v18m6 0V20l6-6 6 6v12"/></symbol><symbol id="etch-wharf" viewBox="0 0 72 48"><path d="M5 16h57M11 16v15h5V16m11 0v23h5V16m11 0v15h5V16m11 0v23h5V16M5 42q9-4 19 0t19 0t21 0"/></symbol><symbol id="etch-radial" viewBox="0 0 72 48"><path d="M4 24h64M36 3v42M10 7l51 34M9 40 59 6M26 24a10 10 0 1 1 20 0 10 10 0 1 1-20 0Zm5 0a5 5 0 1 1 10 0 5 5 0 1 1-10 0Z"/></symbol><symbol id="etch-breakwater" viewBox="0 0 72 48"><path d="M3 32l18-7 15 2 16-9 17 4M4 38l18-7 16 2 16-9 15 3M5 17q10-6 19 0t18-1"/></symbol><symbol id="etch-truss" viewBox="0 0 72 48"><path d="M4 32h65M4 37h65M7 32l10-17 10 17 10-17 10 17 10-17 9 17M16 15h42"/></symbol><symbol id="etch-front-range" viewBox="0 0 72 48"><path d="M3 37l18-20 8 7L43 5l25 30M7 42l17-14 9 4 13-14 17 21M36 15l7-4 6 5"/></symbol><symbol id="etch-marquee" viewBox="0 0 72 48"><path d="M5 21 35 5l32 16-32 18Zm7 0L35 9l24 12-24 13Zm23 18v6M19 21h32"/></symbol><symbol id="etch-canal" viewBox="0 0 72 48"><path d="M4 36l20-12 12 2 29-18M7 42l20-12 11 2 30-17M8 21l11-7m28 21 12-8"/></symbol><symbol id="etch-canopy" viewBox="0 0 72 48"><path d="M5 28q-1-10 8-11 3-12 15-8 5-6 12 0 15-5 17 9 8-1 10 9M8 32q12-10 23-3 12-8 30 2M27 30v12m5-13v13m17-13v13"/></symbol><symbol id="etch-tideway" viewBox="0 0 72 48"><path d="M4 35q18-4 25-16t35-9M4 40q19-1 28-16t33-9M4 45q22-1 32-15t30-10M6 13l7-3m4 6 8-4"/></symbol><symbol id="etch-squares" viewBox="0 0 72 48"><path d="M6 9h20v15H6Zm39 0h20v15H45ZM26 16h19M17 24v13h37V24M29 30h13v12H29Z"/></symbol><symbol id="etch-fountain" viewBox="0 0 72 48"><path d="M4 39q27-8 64 0M14 33q12-17 20 0m1 0q-8-31-15-19m17 19q8-31 15-19m-14 19q12-17 21-2M35 30V6"/></symbol><symbol id="etch-outrigger" viewBox="0 0 72 48"><path d="M5 26q25 13 57-2-12 16-39 11M13 38q17 7 37 0m-31-6 5 7m20-8 5 6M32 27V7l19 14-19 4"/></symbol><symbol id="etch-lattice" viewBox="0 0 72 48"><path d="M5 36 30 8l34 28M8 37h57M15 37 30 18l18 19m-9 0 13-14 13 14M26 26l11 11m-5-17 20 17"/></symbol><symbol id="etch-bayou" viewBox="0 0 72 48"><path d="M3 11q20 16 32 4t32 3M4 19q16 15 33 4t31 1M4 28q14 13 32 3t32 2M5 37q10 10 31 1t31 0"/></symbol><symbol id="etch-meridian" viewBox="0 0 72 48"><ellipse cx="36" cy="24" rx="28" ry="17"/><ellipse cx="36" cy="24" rx="13" ry="17"/><path d="M8 24h56M13 15q23 8 46 0M13 33q23-8 46 0M36 7v34"/></symbol><symbol id="etch-survey" viewBox="0 0 72 48"><path d="M7 38 56 7M4 31l42-27M17 42l50-32M25 15l20 24M35 9l20 24M13 24l16 18"/></symbol></defs></svg>
+          <div class="map-plate-finish" aria-hidden="true"></div>
+          <div class="map-edge-register" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="map-edition-plate" role="group" aria-label="Map edition and center">
+            <svg class="edition-etch" viewBox="0 0 72 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use id="map-edition-etch" href="#etch-survey"/></svg>
+            <div class="map-edition-copy"><strong id="map-edition-place">United States</strong><span id="map-edition-name">National atlas</span></div>
+            <div class="map-edition-position" role="group" aria-label="Map center coordinates"><span id="map-edition-center"></span><svg class="edition-north" viewBox="0 0 18 26" aria-hidden="true"><path d="m9 2 6 18-6-4-6 4Z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M9 2v14l-6 4Z" fill="currentColor"/><text x="9" y="25" text-anchor="middle" fill="currentColor" font-family="system-ui,sans-serif" font-size="5" font-weight="700">N</text></svg></div>
+          </div>
+        </div>
+        <div class="map-topbar">
+          <div class="map-caption"><svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg><span id="map-count">Loading atlas…</span><span id="map-count-compact" aria-hidden="true">Loading…</span></div>
+          <div class="map-tools">
+            <details id="map-layer-picker" class="map-layer-picker">
+              <summary aria-label="Change map layer"><svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m2 8 10-5 10 5-10 5zM2 12l10 5 10-5M2 16l10 5 10-5"/></svg><span id="map-layer-name">3D wireframe</span><span class="layer-chevron" aria-hidden="true"></span></summary>
+              <div class="layer-options" role="group" aria-label="Map layers">
+                <button type="button" data-map-style-option="wireframe" aria-pressed="true"><i class="layer-sample sample-wire" aria-hidden="true"></i>3D wireframe</button>
+                <button type="button" data-map-style-option="city" aria-pressed="false"><i class="layer-sample sample-street" aria-hidden="true"></i>Daylight streets</button>
+                <button type="button" data-map-style-option="satellite" aria-pressed="false"><i class="layer-sample sample-aerial" aria-hidden="true"></i>Aerial imagery</button>
+              </div>
+            </details>
+            <button id="reset-map-btn" class="map-reset" type="button" title="RESET TO THE NATIONWIDE MAP OR SELECTED CITY GUIDE"><svg class="icon"><use href="#icon-fit"/></svg><span>Reset view</span></button>
+          </div>
+        </div>
+        <div id="aerial-notice" hidden><span id="aerial-message" role="status"></span><button type="button" id="aerial-retry" hidden>Retry</button></div>
+        <div id="map-status" class="map-error" hidden><span data-street-message role="status"></span><button type="button" data-retry-street aria-label="Retry loading street detail">Retry</button></div>
+        <details class="map-legend map-key">
+          <summary><span class="map-key-swatches" aria-hidden="true"><i></i><i></i><i></i></span>Map key<svg class="map-key-arrow" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3.5 10 4.5-4.5 4.5 4.5"/></svg></summary>
+          <div class="map-key-panel" role="region" aria-label="Facility colors and access symbols" tabindex="0">
+            <h2>Facilities</h2>
+            <div id="facility-key-items" class="facility-key-items"></div>
+            <p class="map-key-group-note">Numbers count nearby stops. Color ticks show the most common facility types in a mixed group.</p>
+            <h3>Access marks</h3>
+            <div class="map-key-access"><span><b aria-hidden="true">✓</b>Free / public</span><span><b aria-hidden="true">$</b>Admission required</span><span><b aria-hidden="true">?</b>Check access</span></div>
+          </div>
+        </details>
+        
+      </section>
+
+      <nav class="view-switch" aria-label="Map or list view"><button id="map-view-btn" class="active" type="button" aria-pressed="true"><svg class="icon"><use href="#icon-map"/></svg>Map</button><button id="list-view-btn" type="button" aria-pressed="false"><svg class="icon"><use href="#icon-list"/></svg>List</button></nav>
+
+      <aside id="detail-panel" class="detail-panel" aria-label="Location details" hidden>
+        <button id="detail-close" class="detail-close icon-button" type="button" aria-label="Close location details"><svg class="icon"><use href="#icon-close"/></svg></button>
+        <div id="detail-content"></div>
+      </aside>
+    </main>
+  </div>
+
+  <dialog id="about-dialog" class="about-dialog" aria-labelledby="about-title">
+    <button id="about-close" class="dialog-close icon-button" type="button" aria-label="Close about the map"><svg class="icon"><use href="#icon-close"/></svg></button>
+    
+    <h2 id="about-title">Good to know<br>before you go.</h2>
+    <p class="about-lead">IN A PINCH maps restroom stops across the United States. Choose a state on the map, search for a town or open one of the 24 illustrated city guides.</p>
+    <div class="about-grid">
+      <section><h3>Reading the atlas</h3><p>Each facility type has a color and symbol. The Map key identifies them. In 3D wireframe, the regional mesh shows stop density. At street zoom, buildings use mapped footprints and generalized heights. Use the layers button for daylight streets or aerial photography. Zoom into numbered groups to choose an individual stop. Zoom in to see individual places. Neighborhood searches load community-mapped restrooms, gas stations, rest areas, restaurants, bars and other places with possible bathroom access. Some areas have few mapped stops.</p></section>
+      <section><h3>Checking access</h3><p>“Mapped bathrooms” shows places with restroom evidence. The Showers filter shows stops where a source documents a shower. Check opening hours and fees with the operator. At venues marked “Bathroom unconfirmed,” ask staff about access. Pins may point to a building or park entrance. Directions open in Google Maps.</p></section>
+      <section><h3>At a hotel</h3><p>Ask the front desk about lobby restrooms. Private guest-room showers generally require a booking. Hotel cards distinguish dining listed by the operator, dining mapped within the hotel footprint, and places nearby.</p></section>
+      <section><h3>Reading the hours</h3><p id="about-hours">“Open by schedule” uses the posted restroom hours in the facility’s time zone. Access and hours can change.</p></section>
+      <section><h3>Finding nearby stops</h3><p>Allow location access to center on nearby stops. You can also pan or choose a destination. Your location centers the map. Saved stops stay in this browser.</p></section>
+      <section><h3>Your ratings</h3><p>Personal stars stay on this device and power the rating sort. Open a listing to load public community scores or publish your own. Shared scores use public Nostr relays and a separate browser identity for each stop. A withdrawal updates the shared score. Other people may retain copies of earlier submissions.</p></section>
+    </div>
+    <p class="about-data-note"><strong id="total-count"></strong> · Directory reference <span id="checked-date">November 2026</span>.</p>
+    <div class="about-source-links"><a id="about-data-link" href="data/atlas-sources.json" target="_blank" rel="noopener">Nationwide map sources</a><a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener">Report a map issue</a></div>
+    <p class="about-signoff">when you gotta go, you gotta go<span>✦</span></p>
+  </dialog>
+  <dialog id="cities-dialog" class="cities-dialog dp-dialog" aria-labelledby="cities-title">
+    <header class="dp-heading"><div><h2 id="cities-title" tabindex="-1">Where are you headed?</h2></div><button id="cities-close" class="icon-button" type="button" aria-label="Close destination selector"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></header>
+    <div class="dp-toolbar"><div class="dp-tabs" role="tablist" aria-label="Browse destinations">
+      <button id="dp-atlas-tab" role="tab" type="button" aria-selected="true" aria-controls="dp-atlas-panel">States &amp; towns</button>
+      <button id="dp-guides-tab" role="tab" type="button" aria-selected="false" aria-controls="dp-guides-panel" tabindex="-1">Featured cities</button>
+    </div><button class="dp-national" data-national-overview type="button"><svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg> U.S. overview</button></div>
+    <section id="dp-atlas-panel" class="dp-atlas-panel" role="tabpanel" aria-labelledby="dp-atlas-tab">
+      <div class="dp-map-panel"><div class="dp-map-heading"><h3>Choose a state</h3><span id="dp-map-status">United States</span></div>
+        <div id="dp-state-map"></div>
+        <p class="dp-map-credit">U.S. Census Bureau boundaries · Insets shown at different scales</p>
+      </div>
+      <div class="dp-search-panel">
+        <h3>Find a destination</h3>
+        <label class="dp-label" for="state-jump">State or territory</label>
+        <div class="dp-state-combo"><input id="state-jump" type="search" role="combobox" aria-controls="dp-state-options" aria-expanded="false" aria-autocomplete="list" placeholder="Search states and territories" autocomplete="off">
+          <button type="button" id="dp-state-toggle" aria-label="Show all states and territories" aria-controls="dp-state-options" tabindex="-1"><span aria-hidden="true">⌄</span></button>
+          <div id="dp-state-options" role="listbox" aria-label="States and territories" hidden></div>
+        </div>
+        <button class="dp-open-state" id="dp-open-state" type="button" disabled>View state map</button>
+        <label class="dp-label" for="dp-place-query">City or town</label>
+        <input type="search" id="dp-place-query" placeholder="Try Montclair, NJ" autocomplete="off">
+        <p id="dp-place-status" class="dp-status" role="status"></p>
+        <div id="dp-place-results" class="dp-place-results"></div>
+      </div>
+    </section>
+    <section id="dp-guides-panel" role="tabpanel" aria-labelledby="dp-guides-tab" hidden>
+      <div class="city-discovery-controls"><label class="city-search-box"><svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg><input id="city-search" type="search" placeholder="Search featured cities" aria-label="Search featured cities" autocomplete="off"></label><label class="city-region-label"><span class="sr-only">Filter featured cities by region</span><select id="city-region"></select></label></div>
+      <div class="city-picker-caption"><span id="city-search-count" role="status" aria-live="polite">Featured city guides</span></div>
+      <div id="city-grid" class="city-grid"></div>
+    </section>
+    <p id="dp-error" class="dp-status" role="status" hidden></p>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><div class="noscript">Please enable JavaScript to explore the U.S. restroom atlas.</div></noscript>
+  <script src="assets/leaflet.js"></script>
+  <script src="assets/leaflet.markercluster.js"></script>
+  <script src="assets/maplibre-gl.js"></script>
+  <script src="assets/leaflet-maplibre-gl.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

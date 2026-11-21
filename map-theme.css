@@ -1,0 +1,16 @@
+/* Local vector cartography: real coastlines, a decidedly Key West palette. */
+#map,.leaflet-container{background-color:#72d5ca;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='90' viewBox='0 0 120 90'%3E%3Cpath d='M12 22q5 6 10 0t10 0M74 67q5 6 10 0t10 0' fill='none' stroke='%23b5eee0' stroke-width='1.5' opacity='.55' stroke-linecap='round'/%3E%3C/svg%3E")}
+.island-label{background:none;border:0;pointer-events:none!important;text-align:center}
+.island-label span{display:inline-block;white-space:nowrap;transform:rotate(var(--label-angle,0deg));transform-origin:center;line-height:1.2}
+.neighborhood-label{font-family:'Lilita One',var(--display);font-size:18px;font-weight:400;letter-spacing:.7px;color:#59897c;text-shadow:0 1px #fff6}
+.island-title{font-family:'Lilita One',var(--display);font-weight:400;font-size:43px;letter-spacing:2px;color:#196d67;opacity:.8}
+.ocean-label{font-family:'Lilita One',var(--display);font-weight:400;font-size:24px;letter-spacing:1px;color:#288c83;opacity:.7}
+.street-label{font-family:var(--font);font-weight:600;font-size:12px;letter-spacing:.1px;color:#736851;text-shadow:0 1px 2px #fff8e9,1px 0 2px #fff8e9,-1px 0 2px #fff8e9,0 -1px 2px #fff8e9}
+.airport-label{font-family:var(--font);font-weight:700;font-size:12px;letter-spacing:1.5px;color:#548775;text-shadow:0 1px #ffffe8}
+.map-pin{will-change:auto}
+.map-topbar .map-caption{font-size:14px}
+.map-legend{font-size:13px}
+.leaflet-control-attribution a{color:#185e5a}
+.island-note{right:88px;bottom:42px}
+@media(max-width:760px){.island-title{font-size:34px}.neighborhood-label{font-size:15px}.ocean-label{font-size:20px}.street-label{font-size:11px}.map-legend{font-size:12px;gap:10px}}
+@media(max-width:760px){.sidebar{width:calc(100% - 28px);min-width:0}.island-title{display:none}.map-topbar{top:var(--mobile-controls-top,211px)}.map-error{top:calc(var(--mobile-controls-top,211px) + 52px)}}

@@ -1,0 +1,224 @@
+/* A single illuminated seam traces the atlas housing. Artwork stays on the
+   housing and the controls, leaving the geographic layer and facility inks clear. */
+body {
+  --frame-light:color-mix(in srgb,var(--map-local-highlight,#76e5e7) 76%,#dafffa);
+  --frame-road:color-mix(in srgb,var(--map-local-ink,#ffd383) 67%,#ffe8bb);
+  --frame-line:color-mix(in srgb,var(--frame-light) 46%,#263d4b);
+  --frame-focus:#f8ffff;
+  --frame-surface:#10232f;
+  --frame-type:#edf8f7;
+}
+body[data-city] .app > .site-header {
+  color:var(--frame-type);background:linear-gradient(100deg,#07121d,#102735 61%,#101d28);
+  border-bottom:1px solid var(--frame-line);
+  box-shadow:0 2px 0 #06141c,0 4px 13px #03101838;
+}
+body[data-city] .app > .site-header::before {
+  inset:0 0 0 24%;opacity:.35;
+  background:radial-gradient(ellipse at 63% 165%,var(--map-local-water,#16485a),transparent 68%),
+    var(--city-art,none) 70% 53%/cover no-repeat;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 30% 67%,transparent 97%);
+}
+body[data-city] .app > .site-header::after {
+  content:"";display:block;position:absolute;right:0;left:0;bottom:-1px;height:2px;
+  pointer-events:none;background:linear-gradient(90deg,var(--frame-light) 0 15%,transparent 15% 16%,var(--frame-line) 16% 57%,transparent 57% 77%,var(--frame-road) 94%,transparent);
+}
+.hud-horizon {
+  position:absolute;pointer-events:none;left:20%;top:0;width:64%;height:100%;z-index:0;
+  color:var(--frame-light);stroke:currentColor;stroke-width:.85;stroke-linejoin:round;
+  mask-image:linear-gradient(90deg,transparent,#000 14% 79%,transparent);
+}
+.horizon-latitudes {opacity:.49;}
+.horizon-meridians {opacity:.26;}
+body .site-header :is(.brand,.header-actions) {position:relative;z-index:1;}
+body .site-header .brand {gap:10px;align-items:center;}
+body[data-city] .site-header .brand .brand-mark {
+  color:var(--frame-light);
+  filter:drop-shadow(0 0 3px color-mix(in srgb,var(--frame-light) 24%,transparent));
+}
+body .site-header .brand .brand-name {display:block;line-height:0;color:#f4fffb;font-style:normal;}
+.brand-lettering {display:block;width:clamp(143px,14.3vw,204px);height:auto;}
+body .site-header .brand-tagline {color:#c2d8dc;font:550 10px/1.05 var(--atlas-mono,monospace);letter-spacing:.13em;}
+body .site-header .header-actions .city-picker-button {
+  border-color:var(--frame-line);border-radius:2px 11px 2px 2px;
+  background:linear-gradient(112deg,#183441ee,#10202bd9 76%);
+  box-shadow:inset 0 1px 0 #defcff29,inset 3px 0 0 var(--frame-line);
+  color:var(--frame-type);
+}
+body .site-header #current-city-code {
+  color:#091a23;background:var(--frame-light);border-radius:2px 6px 1px 1px;
+}
+body .site-header .about-button {color:#d1efed;}
+body .app .city-strip {
+  border-top:0;border-bottom:1px solid #47616d;
+  background:linear-gradient(90deg,#101e29,#142a35 65%,#10202c);
+}
+body .app .city-strip button:hover,body .app .city-strip .is-current {background:#23414e;}
+body .app .city-strip button.is-current {box-shadow:inset 0 -2px var(--frame-light);}
+body .app .city-shortcuts i {transform:rotate(45deg);width:6px;height:6px;border-radius:1px;}
+
+body[data-city] .workspace .area-intro {border-bottom:1px solid var(--frame-line);}
+body[data-city] .workspace .area-intro #area-level {
+  display:flex;align-items:center;gap:7px;color:#d4eded;letter-spacing:.14em;
+}
+body .area-intro #area-level::before {
+  content:"";display:inline-block;width:19px;height:3px;flex:none;
+  background:linear-gradient(90deg,var(--frame-light) 0 65%,transparent 65% 77%,var(--frame-light) 77%);
+}
+body .workspace .finder-controls .search-box:focus-within {outline:2px solid var(--frame-light);outline-offset:1px;}
+body .workspace .finder-controls .locate-button {
+  background:var(--frame-light);border-color:#aec9ce;color:#10212b;
+  border-radius:2px 8px 2px 2px;box-shadow:inset 0 -2px 0 #123e483d;
+}
+body .workspace .finder-controls .locate-button .icon {color:#132c37;}
+
+body .app .map-region .map-edition-plate {
+  border:1px solid var(--frame-line);border-left:3px solid var(--frame-light);
+  border-radius:2px 9px 2px 2px;background:linear-gradient(105deg,#102330f2,#112430ea);
+  box-shadow:inset 0 1px 0 #c2f3ff12,0 2px 7px #0310195c;
+}
+body .app .map-edition-plate .edition-etch {color:var(--frame-light);}
+body .app .map-edition-plate::after {background:var(--frame-road);}
+body .app .map-region .map-caption {
+  border-radius:2px 8px 2px 2px;color:#edf8f7;
+  box-shadow:inset 2px 0 0 var(--frame-light),0 2px 6px #03101944;
+}
+body .app .map-caption #map-count {font-variant-numeric:tabular-nums;}
+body #detail-panel .stop-head {
+  border-bottom:2px solid var(--facility-light);
+  background:linear-gradient(110deg,#0a1924 8%,#112733 59%,color-mix(in srgb,var(--map-local-paper,#172e40) 80%,#203e4a));
+}
+body #detail-panel .stop-head::after {
+  content:"";position:absolute;right:0;bottom:4px;height:2px;width:31%;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--facility-light));
+}
+body #detail-panel .stop-head .stop-category {color:#d9eaee;font:600 .83rem/1.24 var(--atlas-mono,monospace);}
+body #detail-panel .stop-head #detail-title {color:#f8fffc;}
+body #detail-panel .stop-head .stop-area {color:#d0dfdf;}
+body #detail-panel #detail-close {
+  border:1px solid #90abb5;color:#efffff;background:#10212bed;
+  border-radius:2px 9px 2px 2px;box-shadow:inset 0 1px 0 #d9ffff36;
+}
+/* Dark-mode details keep the different access signals legible. Daylight uses the
+   existing paper reading surface, and aerial photography receives no overlay. */
+body[data-map-style=wireframe] #app #detail-panel {
+  --sheet-paper:#10232e;--sheet-ink:#eef8f6;--sheet-muted:#bdced2;
+  --sheet-deep:var(--frame-light);--sheet-line:#3b5360;
+  color:var(--sheet-ink);background:var(--sheet-paper);border-color:var(--frame-line);
+}
+body[data-map-style=wireframe] #detail-panel .stop-access {
+  color:var(--sheet-ink);background:#172c32;border-color:#4d716c;border-left-color:#8aded0;
+}
+body[data-map-style=wireframe] #detail-panel .stop-access:has([data-tone=unconfirmed]) {
+  background:#2a2a28;border-color:#756649;border-left-color:#efc47e;
+}
+body[data-map-style=wireframe] #detail-panel .stop-evidence,
+body[data-map-style=wireframe] #detail-panel .stop-hours-status {color:#a4efd8;}
+body[data-map-style=wireframe] #detail-panel .stop-evidence[data-tone=unconfirmed] {color:#ffdc9b;}
+body[data-map-style=wireframe] #detail-panel .stop-hours-status[data-state=closed] {color:#ffada8;}
+body[data-map-style=wireframe] #detail-panel .stop-buttons > * {
+  border-color:#617985;background:#192f3b;color:#effaf8;
+}
+body[data-map-style=wireframe] #detail-panel .stop-buttons [aria-pressed=true] {background:#294b57;}
+body[data-map-style=wireframe] #detail-panel .stop-sources {background:#142a35;}
+body[data-map-style=wireframe] #detail-panel :is(.stop-fact,.stop-dining li) {border-color:var(--sheet-line);}
+body[data-map-style=wireframe] #detail-panel .personal-rating button:not(.rating-star) {color:var(--sheet-deep);}
+
+@media(min-width:761px) {
+  body[data-city] .workspace {
+    background:linear-gradient(125deg,#132530,#09151f 57%,#0c1c25);gap:8px;
+  }
+  body[data-city] .workspace .sidebar {
+    border-radius:3px 14px 3px 3px;border-top-color:var(--frame-line);
+    box-shadow:inset 0 2px 0 #d3efff11,0 2px 9px #04101a66;
+  }
+  body .workspace .map-region {
+    border-color:var(--frame-line);border-radius:3px 3px 14px 3px;
+    box-shadow:0 0 0 2px #0a141d,0 0 0 3px #68899527;
+  }
+  body .workspace .area-counts .area-count-item strong {font-family:var(--atlas-mono,monospace);font-variant-numeric:tabular-nums;}
+  body .app .site-header .brand-type {gap:4px;}
+}
+@media(max-width:760px),(max-width:960px) and (max-height:540px) and (pointer:coarse) {
+  body .site-header .brand {gap:6px;}
+  .brand-lettering {width:clamp(103px,29.4vw,137px);}
+  body .site-header .brand-tagline {font-size:8px;letter-spacing:.065em;}
+  .hud-horizon {left:23%;width:65%;opacity:.67;}
+  body #app[data-mobile-hud] .workspace .sidebar {
+    border-radius:3px 16px 3px 3px;border-color:var(--frame-line);
+    box-shadow:inset 0 1px 0 #c6efff25,0 5px 24px #06151f99;
+  }
+  body #app[data-mobile-hud] .workspace .mobile-hud-bar {
+    color:var(--frame-type);border-bottom:1px solid var(--frame-line);
+    background:linear-gradient(112deg,#102632 5%,#1b3541 58%,#10212c);
+  }
+  body #app[data-mobile-hud] .mobile-hud-grip {
+    width:19px;height:7px;border-radius:0;
+    background:repeating-linear-gradient(115deg,transparent 0 2px,var(--frame-light) 2px 4px,transparent 4px 6px);
+  }
+  body #app[data-mobile-hud] #mobile-hud-views .view-switch button::before {border-radius:2px 7px 2px 2px;}
+  body #app[data-mobile-hud] #mobile-hud-views .view-switch button[aria-pressed=true] {color:#f1fffc;}
+  body #app[data-mobile-hud] #mobile-hud-views .view-switch button[aria-pressed=true]::before {
+    border-color:var(--frame-line);background:#24414d;box-shadow:inset 0 -2px 0 var(--frame-light);
+  }
+  body #app[data-mobile-hud] .sidebar .finder-controls .search-box {border-radius:2px 8px 2px 2px;}
+  body #app[data-mobile-hud] .sidebar .finder-controls .locate-button {
+    color:#102331;background:var(--frame-light);border-radius:2px 8px 2px 2px;box-shadow:inset 0 -2px 0 #15445740;
+  }
+  body[data-map-style=wireframe] #app[data-mobile-hud] .sidebar .finder-controls .search-box {
+    background:#142d39;border-color:#6d8993;color:#ebf8f5;
+  }
+  body[data-map-style=wireframe] #app[data-mobile-hud] .sidebar .search-box :is(input,.icon) {color:#f1fbf8;}
+  body[data-map-style=wireframe] #app[data-mobile-hud] .sidebar .search-box input::placeholder {color:#bdcfd3;}
+  body #app[data-mobile-hud] #detail-panel {border-top:2px solid var(--frame-light);border-radius:3px 15px 0 0;}
+  body #app[data-mobile-hud][data-view=list] .workspace .sidebar {border-radius:0;}
+}
+@media(max-width:359px) {
+  body .site-header .brand .brand-mark,body .site-header .brand .brand-mark svg {width:19px;}
+  body .site-header .brand .brand-type {gap:3px;}
+  .brand-lettering {width:95px;}
+}
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more) {
+  body .app .map-region .map-edition-plate,body #detail-panel #detail-close,
+  body .site-header .header-actions .city-picker-button {background:#112430;}
+  .hud-horizon {opacity:.4;}
+}
+@media(forced-colors:active) {
+  .hud-horizon,body[data-city] .app > .site-header::before,body[data-city] .app > .site-header::after {display:none;}
+  .brand-lettering {color:CanvasText;forced-color-adjust:auto;}
+  body #detail-panel .stop-head,body .site-header .header-actions .city-picker-button {border-color:ButtonText;}
+  body #app[data-mobile-hud] #mobile-hud-views .view-switch button[aria-pressed=true] {outline:2px solid Highlight;}
+}
+
+/* Small screens get a compact number while assistive technology retains the
+   precise count and its geographic qualification. Wrapped provider credits
+   reserve their actual measured height under the map controls. */
+#map-count-compact {display:none;}
+body[data-map-style=city] #app:not([data-mobile-hud]) .sidebar .filters .filter-chip[aria-pressed=false] {
+  color:#334e59;-webkit-text-fill-color:currentColor;background:#f3f7ee;border-color:#8a9fa2;
+  transition:none;
+}
+body[data-map-style=city] #app:not([data-mobile-hud]) .sidebar .filters .filter-chip[aria-pressed=false]:hover {
+  color:#172f39;background:#e3ece5;
+}
+body[data-map-style] #app:not([data-mobile-hud]) .map-region .map-key {
+  bottom:max(24px,calc(var(--map-credit-height,20px) + 7px));
+}
+body #app:not([data-mobile-hud]) #detail-panel {max-height:calc(100% - 103px - var(--map-credit-height,20px));}
+#app[data-mobile-hud] .map-caption #map-count {
+  position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+}
+#app[data-mobile-hud] .map-caption #map-count-compact {
+  display:block;font:650 .73rem/1.1 var(--atlas-mono,monospace);white-space:nowrap;font-variant-numeric:tabular-nums;
+}
+body #app[data-mobile-hud][data-view=map] .map-region .map-key {
+  bottom:calc(var(--hud-tray-clearance) + max(22px,var(--map-credit-height,27px) + 8px));
+}
+@media(max-width:359px) {
+  #app[data-mobile-hud] .map-caption #map-count-compact {font-size:10px;}
+  body[data-area-level=country] #app[data-mobile-hud] .site-header #current-city-name {font-size:0;}
+  body[data-area-level=country] #app[data-mobile-hud] .site-header #current-city-name::after {content:"U.S. ATLAS";font-size:11px;}
+}
+@media(orientation:landscape) and (max-height:540px) {
+  body #app[data-mobile-hud][data-view=map] .map-region .map-key {bottom:max(20px,calc(var(--map-credit-height,20px) + 6px));}
+}

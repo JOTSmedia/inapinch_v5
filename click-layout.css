@@ -1,0 +1,68 @@
+/* Leaflet tooltip panes are absolutely positioned and have no intrinsic width.
+   Size the label from its text; use the real map width only as an upper bound.
+   Leaflet owns transform (or left/top in its 2D fallback), so fit offsets
+   are added to the directional margins used by its native tooltip arrows. */
+body #map .leaflet-tooltip {
+  width: max-content;
+  max-width: min(19rem, calc(var(--tooltip-map-width, 100vw) - 16px));
+  margin-left: calc(var(--tooltip-gap-x, 0px) + var(--tooltip-shift-x, 0px));
+  margin-top: calc(var(--tooltip-gap-y, 0px) + var(--tooltip-shift-y, 0px));
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+  text-align: start;
+}
+body #map .leaflet-tooltip-left { --tooltip-gap-x:-6px; }
+body #map .leaflet-tooltip-right { --tooltip-gap-x:6px; }
+body #map .leaflet-tooltip-top { --tooltip-gap-y:-6px; }
+body #map .leaflet-tooltip-bottom { --tooltip-gap-y:6px; }
+body #map .leaflet-tooltip:is(.leaflet-tooltip-top,.leaflet-tooltip-bottom)::before {
+  left: var(--tooltip-arrow-x, 50%);
+}
+body #map .leaflet-tooltip[data-edge-fit]::before { display:none; }
+body #map .leaflet-tooltip[data-anchor-outside] { visibility:hidden; }
+@media (hover:none) {
+  #app.detail-open #map .place-tooltip { visibility:hidden; }
+}
+
+/* Large font settings and long business/source names get their own row before
+   the link text can collapse around a fixed-width icon or adjacent action. */
+#detail-panel .stop-sheet { min-inline-size:0; }
+#detail-panel .stop-address > div { min-inline-size:0; overflow-wrap:break-word; }
+#detail-panel .stop-buttons {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,5.6em),1fr));
+}
+#detail-panel .stop-buttons > * { overflow-wrap:normal; word-break:normal; }
+#detail-panel .stop-source-links { grid-template-columns:minmax(0,1fr); }
+#detail-panel :is(.stop-contact,.stop-source-links,.stop-dining) a {
+  max-inline-size:100%;
+  justify-content:flex-start;
+  overflow-wrap:break-word;
+}
+#detail-panel :is(.stop-contact,.stop-source-links,.stop-dining) a > .stop-link-text {
+  color:inherit;
+  font:inherit;
+  min-inline-size:0;
+  overflow-wrap:anywhere;
+}
+
+/* A result sheet is read over the same list; the list keeps its scroll box. */
+#app.result-preview .workspace::after {
+  content:'';position:absolute;inset:0;z-index:880;background:rgb(7 17 22 / 40%);
+}
+#app.result-preview #detail-panel { z-index:980; }
+#app[data-mobile-hud].result-preview .sidebar { visibility:visible; }
+#detail-panel .stop-show-on-map {
+  display:flex;align-items:center;justify-content:center;gap:.45rem;width:100%;min-height:44px;
+  margin-top:7px;padding:6px 10px;border:1px solid var(--sheet-line);border-radius:4px;
+  background:var(--sheet-paper);color:var(--sheet-deep);font-weight:650;
+}
+
+#detail-panel .stop-head-foot {display:flex;align-items:center;justify-content:space-between;gap:6px 15px;flex-wrap:wrap;margin-top:5px;}
+#detail-panel .stop-head-foot .stop-area {margin:0;flex:1 1 8em;}
+#detail-panel .profile-ratings-link {
+  display:inline-flex;align-items:center;gap:5px;min-height:44px;color:#f4faf9;background:transparent;
+  border:0;padding:0 4px;font:640 12px/1.2 var(--font,system-ui);text-decoration:underline;text-underline-offset:3px;
+}
+#detail-panel .profile-ratings-link span {color:var(--hud-accent,#9fe3ed);font-size:19px;}

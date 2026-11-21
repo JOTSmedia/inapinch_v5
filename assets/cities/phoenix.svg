@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img">
+<title>Hole-in-the-Rock, Papago Park</title><desc>Sunset passes through a weathered red sandstone opening beyond saguaros and the Sonoran basin.</desc>
+<defs><linearGradient id="sky" x1="0" x2="0.85" y1=".08" y2="1"><stop stop-color="#68516f"/><stop offset="1" stop-color="#e7a187"/></linearGradient></defs>
+<rect x="0" y="0" width="1200" height="420" fill="url(#sky)" />
+<circle cx="277" cy="117" r="58" fill="#e9ad79" />
+<path d="M0 201l62-14 80 4 38-14 45 7 74-30 53 20 54-4 74 31 47-4 66 14 51-29 28 5 58-32 38 12 34-7 67 25 66-5 40 25 90-9 46 19h79v74H0Z" fill="#986c81"/>
+<path d="M0 241q78-20 124-13 43-14 92-10l51-30 53 10 37-2 54 24 60-9 53 17 45-8 73 25 79-10 51 11 76-27 54 8 70-32 59 6 52 28 57-5v79H0Z" fill="#80586f"/>
+<path d="M422 298q41-40 92-63l34-42 23-63 28-10 32-38 27 1 28-22 32 2 25-22 25 4 23-26 31 5 4 11 26-8 28 13 15 20 21 9 11 27 22 8 4 15 38 14 8 28 26 14 8 30 23 16 6 26 29 17 17 28 53 26 51 15v37H422Z M794 106q19-22 45-28 21-6 26 5 3 10-8 19-24 21-49 25-17 4-19-5-1-5 5-16Z" fill="#c97b58" fill-rule="evenodd"/>
+<path d="M546 200l24-50 25-13 29-42 23 2-13 21 25-9 27-29-6 20-47 44-35 17-18 30Z" fill="#e49363"/>
+<path d="M622 205q29-40 72-66t70-71q18-20 36-25l29-18 18 8-32 17q-34 26-47 56-20 34-62 53l-28 30-22 10z" fill="#de9062"/>
+<path d="M789 105q21-30 53-34 26-8 35 11l-8 19-18 13 8-16q13-19 0-21-27 0-60 28l-9 14-8 3z" fill="#9a5852"/>
+<path d="M587 237q71-23 135-76 30-24 70-29-41 21-66 48-37 35-84 55l-14 16-40 8z" fill="#a95f50"/>
+<path d="M732 238q40-56 98-79 52-22 63-50l11 11q-12 43-59 63-33 16-52 38l-26 17z" fill="#aa6454"/>
+<path d="M868 237q6-30 47-47t49-40l8 19q-10 21-35 32t-50 35Z" fill="#da8960"/>
+<path d="M955 240l33-38 27 11 22 32-43-20-19 14z" fill="#ac6855"/>
+<path d="M0 296q94-26 183-15t174-10q123-23 218-30t186 19q100 9 187-13t252 30v143H0Z" fill="#a16465"/>
+<path d="M0 350q132-40 265-18t282-13q76-21 158-13t163 25q147 24 332-11v100H0Z" fill="#714d63"/>
+<path d="M484 263.0q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M512 269.3q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M540 270.8q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M568 266.4q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M596 259.5q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M624 255.2q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M652 256.8q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M680 263.1q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M708 269.3q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M736 270.8q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M764 266.3q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M792 259.3q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<path d="M820 255.2q25-10 58-10" fill="none" stroke="#c88a71" stroke-width="2"/>
+<g transform="translate(210,352) scale(0.53)">
+<path d="M-4 0v-46c-15 0-23-6-23-18v-22q0-6 5-6t5 6v19q0 9 13 9v-52q0-7 5-7t5 7v74q12 0 12-10v-19q0-6 5-6t5 6v20q0 18-22 21v24z" fill="#493d50"/>
+<path d="M1-104V-1m-23-84v14m45 9v17" fill="none" stroke="#795465" stroke-width="1.5"/>
+</g>
+<g transform="translate(397,328) scale(0.24)">
+<path d="M-4 0v-46c-15 0-23-6-23-18v-22q0-6 5-6t5 6v19q0 9 13 9v-52q0-7 5-7t5 7v74q12 0 12-10v-19q0-6 5-6t5 6v20q0 18-22 21v24z" fill="#493d50"/>
+<path d="M1-104V-1m-23-84v14m45 9v17" fill="none" stroke="#795465" stroke-width="1.5"/>
+</g>
+<g transform="translate(1084,385) scale(0.78)">
+<path d="M-4 0v-46c-15 0-23-6-23-18v-22q0-6 5-6t5 6v19q0 9 13 9v-52q0-7 5-7t5 7v74q12 0 12-10v-19q0-6 5-6t5 6v20q0 18-22 21v24z" fill="#493d50"/>
+<path d="M1-104V-1m-23-84v14m45 9v17" fill="none" stroke="#795465" stroke-width="1.5"/>
+</g>
+<g transform="translate(1168,399) scale(0.35)">
+<path d="M-4 0v-46c-15 0-23-6-23-18v-22q0-6 5-6t5 6v19q0 9 13 9v-52q0-7 5-7t5 7v74q12 0 12-10v-19q0-6 5-6t5 6v20q0 18-22 21v24z" fill="#493d50"/>
+<path d="M1-104V-1m-23-84v14m45 9v17" fill="none" stroke="#795465" stroke-width="1.5"/>
+</g>
+<g transform="translate(81,416) scale(1.38)">
+<path d="M-4 0v-46c-15 0-23-6-23-18v-22q0-6 5-6t5 6v19q0 9 13 9v-52q0-7 5-7t5 7v74q12 0 12-10v-19q0-6 5-6t5 6v20q0 18-22 21v24z" fill="#493d50"/>
+<path d="M1-104V-1m-23-84v14m45 9v17" fill="none" stroke="#795465" stroke-width="1.5"/>
+</g>
+<path d="M0 414q78-22 131-11t114 17H0Z" fill="#4a3e50"/>
+</svg>
