@@ -1,1 +1,0 @@
-globalThis.inAPinchAtlasData("3-41","H4sIAAAAAAACE03LsQ6DIBAA0F8hN18TTj0OZoduLo6GoWkYCCIJ0sG/d1CTvv0tC3xY99wPnRhAQe7coDXhi4y1LOIQppjKuqeoxpLzb4vtUGPYWqjg8elMYgHJ3d9c32iSv/+u5RvqoeZWagDvT8wlwsJ9AAAA");
